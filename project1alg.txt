@@ -1,0 +1,188 @@
+Sergio Munguia : account ml56
+project1 algorithm
+February 27, 2014
+
+Initialize and Declare Variables
+
+float userHealth = 1000, beastHealth = 1000, score = 0, highscore = 0
+int menuchoice = 0, potion = 0, decision = 0, userDamage = 0, beastDamage = 0, bstatus = 0, round = 0
+string boss = "The Defiler", userName, highscoreName
+bool fight = true, battle = true
+
+Declare a input file pointer
+ifstream infile
+Declare a output file pointer
+ofstream outfile
+
+Display introduction to the game
+Display the menu 
+do {
+Prompt for choice
+1.)Play Game
+2.)See The Rules
+3.)Highest Score
+4.)Exit
+
+If (menuchoice == 1)
+
+Display Welcome to the game 
+Prompt for userName
+
+do loop { battle loop
+do {
+Display the potion menu
+Prompt for potion
+1.) Potion of Speed
+2.) Potion of Strength
+3.) Potion of Stillness
+4.) Potion of Weakness
+}while (potion != 1 && potion != 2 && potion != 3 && potion != 4)
+
+Display Sword Graphics & Battle begins !
+make user health & opponents Health 1000 points 
+userHealth = 1000;
+beastHealth = 1000;
+battle = true;
+
+Do loop { battle loop
+Display battle action menu
+
+srand(time(NULL))
+random number for attack of user
+userDamage = rand()%125 + 75
+			
+srand(time(NULL));
+random number for attack of beast
+beastDamage = rand()%75 + 50
+			
+srand(time(NULL))
+random number 1-3 for beast to attack or defend or nuetral
+bstatus = rand()%3 + 1
+
+if decision == 1 
+Attack beast & if Beast is nuetral attack 50% more. 
+
+	if (bstatus == 1)
+	Display user attack & beast attacks
+	beastHealth -= userDamage;
+	userHealth -= beastDamage;
+	
+	else if (bstatus == 2)
+	Display beast counter attacks 
+	beastDamage = (beastDamage + (beastDamage * .50))
+	userHealth -= beastDamage
+	
+	else if (bstatus == 3)
+	Display beast defends and  user attack is deflected
+	userDamage = (userDamage + (userDamage * .75))
+	beastHealth -= userDamage;
+	beastDamage = (beastDamage - (beastDamage * .30))
+	userHealth -= beastDamage
+
+else if (decision == 2)
+Defend against attacks. 
+	
+	if (bstatus == 1)
+	Display user counter attacks & beast attack is deflected
+	beastHealth -= userDamage;
+
+	else if (bstatus == 2)
+	Display user defends & beast defends so no damage incures
+	
+	else if (bstatus == 3)
+	Display beast is nuetral & user attack is critical 
+	beastDamage = (beastDamage - (beastDamage *.30));
+	beastDamage = beastDamage;
+	userHealth -= beastDamage;
+
+else if (decision == 3)
+potion casted.
+	if (potion == 1)
+	Display Attack is 2x
+	userDamage *= 2
+	beastHealth -= userDamage
+	potion = 0
+	
+	else if (potion == 2)
+	Display Critical attack 
+	userDamage = (userDamage + (userDamage * .50));
+	beastHealth -= userDamage;
+	potion = 0
+	
+	else if (potion == 3)
+	Display Still potion casted
+	userDamage = (userDamage + (userDamage * .75));
+	beastHealth -= userDamage;
+
+	
+	else if (potion == 4)
+	//Display Weakness potion casted
+	beastHealth -= beastHealth * .20;
+	potion = 0;
+	
+else (display invalid selection)
+	
+Exit battle loop - beast dies
+	if (beastHealth <= 0)
+	
+Exit battle loop - user dies
+	else if (userHealth <= 0)
+	
+}while (battle != false)
+
+Display the user has lost & exit entire fight loop if player dies 
+if (userHealth <= 0)
+fight = false 
+
+else if (beastHealth <= 0)
+round++
+Display the user has won & new round number
+Change the boss to the next boss name. 
+
+switch (round)
+case 1: 
+	boss = "Compiler"
+	break
+case 2:
+	boss = "Corrupt File"
+	break
+case 3:
+	boss = "Debugger"
+	break
+case 4:
+	boss = "Infinite Loop"
+	break
+default:
+	fight = false
+	Display That You Have Won All 5
+	round = 0
+	boss = "The Defiler"
+	
+}while (fight != false);
+	infile.open("highscore.txt", ios::in)
+	read in highscore
+	close file
+	
+	if (score > highscore) 
+		outfile.open("highscore.txt", ios:: out);
+		overwrite highscore with new score
+		close file
+
+else if (menuchoice == 2)
+Display storyline to the user
+Display the rules
+
+else if (menuchoice == 3)
+
+open the file to read in data 
+check for file 
+close file 
+display the highest score holder 
+
+else if(menuchoice == 4)
+display goodbye to the user
+else cout invalid selection. 
+
+}while(meuchoice != 4)
+
+
